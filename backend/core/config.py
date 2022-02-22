@@ -15,7 +15,7 @@ class Settings(BaseSettings):
     DATABASE_URI: str = "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/licenta"
     SHOW_DDL = False
 
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = ["http://localhost:3000"]
 
 
 settings = Settings()
