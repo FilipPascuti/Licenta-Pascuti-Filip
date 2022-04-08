@@ -12,7 +12,7 @@ class Settings(BaseSettings):
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
-    DATABASE_URI: str = "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/licenta"
+    DATABASE_URI: str = "postgresql+psycopg2://postgres:admin@127.0.0.1:5432/licenta"
     SHOW_DDL = False
 
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = ["http://localhost:3000"]

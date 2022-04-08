@@ -12,7 +12,7 @@ from core.config import settings
 from db.session import SessionLocal
 
 reusable_oauth2 = OAuth2PasswordBearer(
-    tokenUrl=f"{settings.API_STR}/login"
+    tokenUrl=f"{settings.API_STR}/auth/login"
 )
 
 

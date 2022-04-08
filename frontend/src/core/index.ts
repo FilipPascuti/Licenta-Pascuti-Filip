@@ -1,4 +1,5 @@
-export const baseUrl = "localhost:8000";
+// export const baseUrl = "localhost:8000";
+export const baseUrl = "fastapi-backend-presentation.herokuapp.com";
 
 export const getLogger: (tag: string) => (...args: any) => void =
     tag => (...args) => console.log(tag, ...args);
