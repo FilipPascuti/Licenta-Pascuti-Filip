@@ -19,8 +19,14 @@ class UserInDBBase(UserBase):
     class Config:
         orm_mode = True
 
+
 class User(UserInDBBase):
     pass
+
+
+class UserDetails(UserBase):
+    vectorization: Optional[str]
+    cluster: Optional[int]
 
 # class UserInDB(UserInDBBase):
 #     hashed_password: str

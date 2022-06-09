@@ -1,7 +1,6 @@
 import {baseUrl, config, formDataConfig, withLogs} from "../core";
 import axios from "axios";
 
-
 const authUrl = `http://${baseUrl}/api/auth/login`
 const registerUrl = `http://${baseUrl}/api/auth/register`
 

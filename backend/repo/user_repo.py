@@ -2,9 +2,7 @@ from typing import Optional
 
 from sqlalchemy.orm import Session
 
-from core.security import get_password_hashed, verify_password
 from domain.user import User
-from dto.user import UserCreate
 
 
 class UserRepo:
@@ -14,25 +12,23 @@ class UserRepo:
     def get(self, db: Session, id: int) -> Optional[User]:
         return db.query(User).filter(User.id == id).first()
 
-    def create(self, db: Session, *, user_in: UserCreate) -> User:
-        db_user = User(
-            username=user_in.username,
-            hashed_password=get_password_hashed(user_in.password),
-            fullname=user_in.fullname,
-        )
-
-        db.add(db_user)
+    def create(self, db: Session, *, user: User) -> User:
+        db.add(user)
         db.commit()
-        db.refresh(db_user)
-        return db_user
-
-    def authenticate(self, db: Session, *, username: str, password: str) -> Optional[User]:
-        user = self.get_by_username(db, username=username)
-        if not user:
-            return None
-        if not verify_password(password, user.hashed_password):
-            return None
+        db.refresh(user)
         return user
+
+    def update(self, db: Session, *, user_in: User, vectorization: str, cluster: int):
+        user_in.vectorization = vectorization
+        user_in.cluster = cluster
+        db.add(user_in)
+        db.commit()
+        db.refresh(user_in)
+        return user_in
+
+    def get_all_from_cluster(self, db: Session, *, cluster: int):
+        users = db.query(User).filter(User.cluster == cluster).all()
+        return users
 
 
 user_repo = UserRepo()

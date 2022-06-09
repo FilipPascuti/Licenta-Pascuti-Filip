@@ -1,3 +1,4 @@
+import pickle
 from typing import Generator
 
 from fastapi import Depends, HTTPException
@@ -22,6 +23,13 @@ def get_db() -> Generator:
         yield db
     finally:
         db.close()
+
+
+def get_kmeans_model() -> Generator:
+    # with open("../backend/ai_model/kmeans_model.pkl", "rb") as file:
+    with open("/Users/filip/Documents/Licenta/Licenta-Pascuti-Filip/backend/ai_model/kmeans_model.pkl", "rb") as file:
+        kmeans = pickle.load(file)
+        yield kmeans
 
 
 def get_current_user(
